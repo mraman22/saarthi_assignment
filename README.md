@@ -9,8 +9,12 @@
   $ pip install djongo
   
 ##### 4. clone repository and go to directory 'saarthi_ass' and run following command
-  $ cd saarthi_ass/
-  $ python3 manage.py makemigrations library
-  $ python3 manage.py migrate library
-  $ python3 manage.py runserver 8080
+
+  > $ cd saarthi_ass/
+  > 
+  > $ python3 manage.py makemigrations library
+  > 
+  > $ python3 manage.py migrate library
+  > 
+  > $ python3 manage.py runserver 8080
         
