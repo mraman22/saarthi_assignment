@@ -19,7 +19,7 @@ from django.urls import path
 from library import views
 
 urlpatterns = [
-    path('api/external-books/<str:name>', views.searchBookByName),
+    path('api/external-books', views.searchBookByName),
     path('api/v1/books', views.getAllBooks_addBook),
     path('api/v1/books/<str:id>', views.bookById)
 ]

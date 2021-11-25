@@ -16,15 +16,23 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 @api_view(['GET'])
-def searchBookByName(req, name):
-    try :
-        result = Books.objects.filter(name__exact = name)
-        books_serialized = LibrarySerializer(result, many = True)
-        res = {"status_code" : status.HTTP_200_OK, "status" : "success", "data" : books_serialized.data }
-    
-    except ObjectDoesNotExist:
-        res = {"status_code" : status.HTTP_200_OK, "status" : "success", "data" : [] }
-    return JsonResponse(res, safe=False)
+def searchBookByName(req):
+    if req.method == "GET":
+        name = req.GET.get("name")
+        try :
+            result = Books.objects.filter(name__exact = name)
+            books_serialized = LibrarySerializer(result, many = True)
+            res = {"status_code" : status.HTTP_200_OK, "status" : "success", "data" : books_serialized.data }
+        
+        except ObjectDoesNotExist:
+            res = {"status_code" : status.HTTP_200_OK, "status" : "success", "data" : [] }
+        return JsonResponse(res, safe=False)
+
+
+    else :
+        res = {"status_code" : status.HTTP_400_BAD_REQUEST, "status" : "failed"}
+        return JsonResponse(res, status=status.HTTP_204_NO_CONTENT)
+
 
 
 
@@ -109,4 +117,4 @@ def bookById(req, id):
 
     else :
         res = {"status_code" : status.HTTP_400_BAD_REQUEST, "status" : "failed"}
-        return JsonResponse(res, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse(res, status=status.HTTP_400_BAD_REQUEST)
